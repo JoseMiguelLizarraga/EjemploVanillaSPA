@@ -1,147 +1,23 @@
 <!DOCTYPE html>
-<html>
-  <head lang="es">
-      <meta charset="UTF-8">
-      <title> EjemploAplicacionSPA </title>
-      <link rel="stylesheet" href="css/bootstrap.min.css">  
-  </head>
-  <body>
+<html lang="es">
+  <head>
 
-    <div style="display: none" id="loading-spinner"></div> <!-- Imagen de carga de datos -->
-
-    <!-- Menú de Navegación -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     
-    <nav id="menu-navegacion" class="navbar navbar-inverse" role="navigation">  <!-- class="navbar navbar-inverse navbar-fixed-top" -->
-        <div class="container">
-        <!--===================================-->  
-            <!--  Este Menu queda escondido y aparece solo cuando la pantalla es muy pequeña...son las Barritas -->
-        
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php"> EjemploAplicacionSPA </a>
-            </div>
-        <!--===================================-->		
-            
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">				
-                    <li><a href="#" link="home">Home</a></li>
-                    <li><a href="#" link="apuntesTema">apuntesTema</a></li> 
-  
-                    <!--
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Opciones <b class="caret"></b></a>
-                        <ul class="dropdown-menu">						
-                            <li> <a href="cerrar_sesion"> Cerrar Sesion </a> </li> 
-                        </ul>
-                    </li>      
-                    -->
-                    
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Fin Menú de Navegación -->
-    <!-- =================================================================== -->
-    
-
-    <!-- <button id="miBoton" type="button" onclick="probando()"> probando </button> -->
-
-    <contenido-app></contenido-app>
-
     <script type="module">
 
-    // import * as funcionesGenericas from './modules/funcionesGenericas.js';
+      import {configuracionesProyecto} from './modules/configuracionesProyecto.js';
 
-    import {Inicio} from "./componentes/inicio.js";    
-    import {ApuntesTema} from "./componentes/apuntesTema/apuntesTema.js";
+      console.log(configuracionesProyecto);
 
-    var componente = null;
+    </script>
 
-    var rutasProyecto = [
-        {nombre: "home", ruta: "home.html", componente: Inicio, default: true},
-        {nombre: "apuntesTema", ruta: "apuntesTema/index.html", componente: ApuntesTema}
-    ];
-
-    const inicializarComponente = (elemento) => 
-    {
-        componente = new elemento.componente();
-        var html = componente.cargarVista();
-        document.getElementsByTagName("contenido-app")[0].innerHTML = html;
-        //componente.probando();
-    }
-
-    //=============================================================================>>>>>
-    // Al cargar el documento
-
-    var nombre = window.location.href.split("/").reverse()[0];   // "apuntesTema"
-
-    if (rutasProyecto.some(c=> c.nombre == nombre)) 
-    {
-        var rutaUrl = rutasProyecto.find(c=> c.nombre == nombre);
-        inicializarComponente(rutaUrl);
-    }
-    else 
-    {
-        if (rutasProyecto.some(c=> c.default == true)) {
-            var rutaPorDefecto = rutasProyecto.find(c=> c.default == true);
-            inicializarComponente(rutaPorDefecto);
-        }
-        else {
-            window.location.href = "404.html";
-        }
-    }
-
-    //=============================================================================>>>>>
-
-    Array.from(document.getElementsByTagName("a")).forEach(c=> 
-    {
-        c.addEventListener("click", (e) => 
-        { 
-            e.preventDefault();
-
-            if (componente != null) {
-                componente.destructor();
-                //componente.probando();
-            }
-
-            var nombre = e.target.getAttribute("link");
-
-            //var urlBaseProyecto = window.location.origin + window.location.pathname;   // "http://localhost/miProyecto/"
-            //history.pushState({}, null, `${urlBaseProyecto}?${nombre}`);               // Cambia la url que ve el usuario. Ej:   "http://localhost/AAA/probandoSPA/?apuntesTema"
-            history.replaceState({}, "", nombre);
-
-            var rutaEncontrada = rutasProyecto.find(c=> c.nombre == nombre);
-
-            if (rutaEncontrada != null) 
-            {
-                inicializarComponente(rutaEncontrada);
-
-                /*
-                fetch("vistas/" + elemento.ruta)
-                .then(res => {
-                    return res.text();
-                })
-                .then(data => {
-                    //console.log(elemento);
-                    //document.getElementsByTagName('contenido-app')[0].innerHTML = data;
-                });
-                */
-            }
-
-
-
-        });
-    });
-
-    </script>    
-
-
+  </head>
+  <body>
+      
+    <h1> Probando OK. </h1>
 
   </body>
 </html>
