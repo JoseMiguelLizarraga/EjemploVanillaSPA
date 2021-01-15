@@ -1,11 +1,16 @@
 
-import { ApuntesTema } from "./apuntesTema.js";
+//import { ApuntesTema } from "./apuntesTema.js";
+// import {Vista} from './vista.js';
+
+import { ApuntesTema } from './apuntesTema.js';
+
+//import { ApuntesTema } from "./apuntesTema.js";
 
 
-export class Vista extends ApuntesTema
+export class Vista
 {
     constructor() {
-        super();  // Llama al constructor de la clase padre
+        
     }
 
     mostrar() 
@@ -23,5 +28,7 @@ export class Vista extends ApuntesTema
     }
 
  
-};
+}
+
+//export { Vista }
 
