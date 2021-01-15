@@ -1,5 +1,5 @@
- # Customized error messages.
-ErrorDocument 404 /404.html
+# Customized error messages.
+# ErrorDocument 404 /404.html
 
 # Set the default handler.
 DirectoryIndex index.html
