@@ -4,6 +4,7 @@
       <meta charset="UTF-8">
       <title> EjemploAplicacionSPA </title>
       <link rel="stylesheet" href="css/bootstrap.min.css">  
+      <link rel="stylesheet" href="css/estilos.css"> 
   </head>
   <body>
 
@@ -54,115 +55,7 @@
 
     <contenido-app></contenido-app>
 
-    <!-- <include></include> -->
-
-    <script type="module">
-
-    import {Inicio} from "./componentes/inicio.js";    
-    import {ApuntesTema} from "./componentes/apuntesTema/apuntesTema.js";
-
-    //============================================================================================>>>>> probando
-    /*    
-    var i = document.getElementsByTagName("include")[0];
-    let rutaArchivo = "404.html";
-
-    fetch(rutaArchivo).then(archivo => 
-    {
-        archivo.text().then(contenido => 
-        {
-            console.log(contenido);
-            i.insertAdjacentHTML('afterend', contenido);
-            i.remove();
-        });
-    });
-    */
-    //============================================================================================>>>>> probando
-
-
-    var componente = null;
-
-    var rutasProyecto = [
-        {nombre: "home", ruta: "home.html", componente: Inicio, default: true},
-        {nombre: "apuntesTema", ruta: "apuntesTema/index.html", componente: ApuntesTema}
-    ];
-
-    const inicializarComponente = (elemento) => 
-    {
-        componente = new elemento.componente();
-        var html = componente.cargarVista();
-        //document.getElementsByTagName("contenido-app")[0].innerHTML = html;
-        //componente.probando();
-    }
-
-    //=============================================================================>>>>>
-    // Al cargar el documento
-
-    var nombre = window.location.href.split("/").reverse()[0];       // "apuntesTema"
-    if (nombre.includes("#")) { nombre = nombre.replace("#", ""); }  // Remueve el # en caso de que lo tenga
-
-    if (rutasProyecto.some(c=> c.nombre == nombre)) 
-    {
-        var rutaUrl = rutasProyecto.find(c=> c.nombre == nombre);
-        inicializarComponente(rutaUrl);
-    }
-    else 
-    {
-        if (rutasProyecto.some(c=> c.default == true)) {
-            var rutaPorDefecto = rutasProyecto.find(c=> c.default == true);
-            inicializarComponente(rutaPorDefecto);
-        }
-        else {
-            window.location.href = "404.html";
-        }
-    }
-
-    //=============================================================================>>>>>
-
-    Array.from(document.getElementsByTagName("a")).forEach(c=> 
-    {
-        c.addEventListener("click", (e) => 
-        { 
-            e.preventDefault();
-
-            if (componente != null) {
-                componente.destructor();
-                //componente.probando();
-            }
-
-            var nombre = e.target.getAttribute("link");
-
-            //var urlBaseProyecto = window.location.origin + window.location.pathname;   // "http://localhost/miProyecto/"
-            //history.pushState({}, null, `${urlBaseProyecto}?${nombre}`);               // Cambia la url que ve el usuario. Ej:   "http://localhost/AAA/probandoSPA/?apuntesTema"
-            history.replaceState({}, "", nombre);
-
-            if (nombre.includes("#")) { nombre = nombre.replace("#", ""); }  // Remueve el # en caso de que lo tenga
-
-            var rutaEncontrada = rutasProyecto.find(c=> c.nombre == nombre);
-
-            if (rutaEncontrada != null) 
-            {
-                inicializarComponente(rutaEncontrada);
-
-                /*
-                fetch("vistas/" + elemento.ruta)
-                .then(res => {
-                    return res.text();
-                })
-                .then(data => {
-                    //console.log(elemento);
-                    //document.getElementsByTagName('contenido-app')[0].innerHTML = data;
-                });
-                */
-            }
-
-
-
-        });
-    });
-
-    </script>    
-
-
+    <script src="cargaComponentes.js" type="module"></script>    
 
   </body>
 </html>

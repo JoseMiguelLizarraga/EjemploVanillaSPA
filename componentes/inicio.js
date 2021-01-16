@@ -5,6 +5,7 @@ export class Inicio
     constructor()
     {
         //alert("Inicio");
+        this.cargarVista();
     }
 
     destructor() {

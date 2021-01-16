@@ -1,26 +1,36 @@
 
 
+import {mostrarLoadingSpinner, ocultarLoadingSpinner} from '../funciones/funcionesGenericas.js'
 
 export class CargaVista
 {
     constructor()
     {
-     
+        this.validarSesionUsuario();
+    }
+
+    validarSesionUsuario()
+    {
+        // if (localStorage.getItem("mi_token") == null) 
+        // {
+        //     throw "No ha iniciado sesión";
+        // }
     }
 
     cargarHtml(rutaArchivo)
     {
-        //var i = document.getElementsByTagName("include")[0];
-
+        mostrarLoadingSpinner();
+        
         fetch(rutaArchivo).then(archivo => 
         {
             archivo.text().then(contenido => 
             {
-                //console.log(contenido);
-                //i.insertAdjacentHTML("afterend", contenido);
-                //i.remove();
                 document.getElementsByTagName("contenido-app")[0].innerHTML = contenido;
             });
+        })
+        .finally(c=> {
+            ocultarLoadingSpinner();
         });
     }
+    
 }
