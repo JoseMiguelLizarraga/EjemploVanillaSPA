@@ -1,24 +1,5 @@
 
 
-# Esto es para negar el acceso a las carpetas que contienen los archivos. Ej: css
-Options -Indexes
-
-
-# Esto es para definir el index de un directorio. No es impresindible, lo puedes sacar
-
-DirectoryIndex index.html
-
-
-# Esto es para negar el acceso directo desde el navegador a los archivos que tengan las extensiones escogidas. Ej: txt, ini, etc
-
-<FilesMatch "\.(txt|sql)$">
-
-	Deny from all
-
-</FilesMatch>
-
-
-# Esto es importantisimo, sino varias cosas no funcionan
 RewriteEngine On
 
 
@@ -29,57 +10,34 @@ RewriteEngine On
 # En localhost se pone todo lo que viene despues de http://localhost/
 
 RewriteBase /EjemploAplicacionSPA/
-
-
-# RewriteCond %{Si existe la carpeta a la cual esta accediendo el usuario} 
-
 RewriteCond %{SCRIPT_FILENAME} !-d 
-
-
-#RewriteCond %{REQUEST_FILENAME} !-f 
-
-
-# RewriteCond %{Si existe el archivo al cual esta accediendo el usuario}
-
 RewriteCond %{SCRIPT_FILENAME} !-f 
+#RewriteRule ^(.*)$ index.html?op=$1 [L]
 
 
-# Para varias variables (Ej: 3) es asi:   RewriteRule ^(.*)/(.*)-(.*)$ index.html?seccion=$1&categoria=$2&otra=$3 [L]
+#=========================================================================================>>>>>
 
-RewriteRule ^(.*)$ index.html?op=$1 [L]
-
-#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
-# ofrece un documento de error global
-
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^.*$ /404.html [L]
-
-#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
+ #RewriteCond %{HTTP_HOST} !^www.example.com$
+ #RewriteCond %{HTTP_HOST} ^blog\.example.com$
+ #RewriteRule ^/(.*) http://blog.example.com/index.php/$1 [L, QSA]
 
 
 
-# Esto es para que el sitio web quede sin el www.
+ #RewriteRule ^/(.*) http://blog.example.com/index.php/$1 [L, QSA]
 
 
-<IfModule mod_rewrite.c>
-  
-  RewriteCond %{HTTPS} !=on
-  
-  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-  
-  RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L] 
-
-</IfModule>
+ #=========================================================================================>>>>>
 
 
-# En caso de que la url no exista envia al 404
-
-#ErrorDocument 404  http://www.tupagina.com/404.html
+ RewriteRule ^/(.*) https://josemiguellizarraga.github.io/EjemploAplicacionSPA/index.html/$1 [L, QSA]
 
 
 
-#Seguridad en htaccess:   http://www.jpereira.net/web/un-poco-de-seguridad-con-htaccess
+
+
+
+
+
 
 
 
