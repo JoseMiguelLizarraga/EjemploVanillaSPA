@@ -17,20 +17,31 @@ export class CargaVista
         // }
     }
 
-    cargarHtml(rutaArchivo)
+    cargarHtml(json = {})
     {
+        let etiquetaContenido = document.getElementsByTagName("contenido-app")[0];
+
         mostrarLoadingSpinner();
-        
-        fetch(rutaArchivo).then(archivo => 
+
+        if (json.rutaArchivo != null) 
         {
-            archivo.text().then(contenido => 
+            fetch(json.rutaArchivo).then(archivo => 
             {
-                document.getElementsByTagName("contenido-app")[0].innerHTML = contenido;
+                archivo.text().then(contenido => 
+                {
+                    etiquetaContenido.innerHTML = contenido;
+                });
+            })
+            .finally(c=> {
+                ocultarLoadingSpinner();
             });
-        })
-        .finally(c=> {
+        }
+        if (json.textoHtml != null) 
+        {
+            etiquetaContenido.innerHTML = json.textoHtml;
             ocultarLoadingSpinner();
-        });
+        }
+
     }
     
 }

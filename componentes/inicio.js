@@ -1,9 +1,11 @@
+import { CargaVista } from "./cargaVista.js";
 
-export class Inicio
+export class Inicio extends CargaVista
 {
 
     constructor()
     {
+        super();
         //alert("Inicio");
         this.cargarVista();
     }
@@ -15,7 +17,13 @@ export class Inicio
 
     cargarVista()
     {
-        document.getElementsByTagName("contenido-app")[0].innerHTML = `<h1>Inicio</h1>`;
+        let texto = `
+        <h1>Inicio (Desde la clase Inicio) </h1>
+        `;
+
+        this.cargarHtml({textoHtml: texto});
+
+        //document.getElementsByTagName("contenido-app")[0].innerHTML = `<h1>Inicio</h1>`;
         //return `<h1>Inicio</h1>`;
     }
     

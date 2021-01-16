@@ -28,7 +28,8 @@ export class ApuntesTema extends CargaVista
     
     cargarVista()
     {
-        this.cargarHtml("componentes/apuntesTema/index.html");        
+        this.cargarHtml({ rutaArchivo: "componentes/apuntesTema/index.html" });       
+
         //return new Vista().mostrar(); 
         //return `<h1>ApuntesTema</h1>`;
     }
