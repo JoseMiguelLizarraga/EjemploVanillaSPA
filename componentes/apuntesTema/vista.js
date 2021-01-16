@@ -1,10 +1,6 @@
 
-//import { ApuntesTema } from "./apuntesTema.js";
-// import {Vista} from './vista.js';
 
-import { ApuntesTema } from './apuntesTema.js';
-
-//import { ApuntesTema } from "./apuntesTema.js";
+//import { ApuntesTema } from './apuntesTema.js';
 
 
 export class Vista

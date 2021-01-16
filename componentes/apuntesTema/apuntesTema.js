@@ -1,13 +1,15 @@
+import { CargaVista } from '../cargaVista.js';
 import {Vista} from './vista.js';
 
 var operacion = ""; 
 
-export class ApuntesTema
+export class ApuntesTema extends CargaVista
 {
     //nombre = "";
 
     constructor()
     {
+        super();
         //this.nombre = "Leonardo Lima";
 
         //alert("ApuntesTema");
@@ -25,6 +27,26 @@ export class ApuntesTema
     
     cargarVista()
     {
+        //============================================================================================>>>>> probando
+
+        this.cargarHtml("componentes/apuntesTema/index.html");
+        /*   
+        var i = document.getElementsByTagName("include")[0];
+        let rutaArchivo = "componentes/apuntesTema/index.html";
+
+        fetch(rutaArchivo).then(archivo => 
+        {
+            archivo.text().then(contenido => 
+            {
+                console.log(contenido);
+                i.insertAdjacentHTML('afterend', contenido);
+                i.remove();
+            });
+        });
+        */
+        
+        //============================================================================================>>>>> probando
+
         return new Vista().mostrar();
   
         //return `<h1>ApuntesTema</h1>`;

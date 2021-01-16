@@ -14,7 +14,8 @@ export class Inicio
 
     cargarVista()
     {
-        return `<h1>Inicio</h1>`;
+        document.getElementsByTagName("contenido-app")[0].innerHTML = `<h1>Inicio</h1>`;
+        //return `<h1>Inicio</h1>`;
     }
     
 };

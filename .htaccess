@@ -1,13 +1,89 @@
-# Customized error messages.
-# ErrorDocument 404 /404.html
 
-# Set the default handler.
+
+# Esto es para negar el acceso a las carpetas que contienen los archivos. Ej: css
+Options -Indexes
+
+
+# Esto es para definir el index de un directorio. No es impresindible, lo puedes sacar
+
 DirectoryIndex index.html
 
-# Various rewrite rules.
+
+# Esto es para negar el acceso directo desde el navegador a los archivos que tengan las extensiones escogidas. Ej: txt, ini, etc
+
+<FilesMatch "\.(txt|sql)$">
+
+	Deny from all
+
+</FilesMatch>
+
+
+# Esto es importantisimo, sino varias cosas no funcionan
+RewriteEngine On
+
+
+
+
+
+# En un servidor wer se pone solo asi:   RewriteBase /
+# En localhost se pone todo lo que viene despues de http://localhost/
+
+#RewriteBase /EjemploAplicacionSPA/
+RewriteBase /
+
+
+# RewriteCond %{Si existe la carpeta a la cual esta accediendo el usuario} 
+
+RewriteCond %{SCRIPT_FILENAME} !-d 
+
+
+#RewriteCond %{REQUEST_FILENAME} !-f 
+
+
+# RewriteCond %{Si existe el archivo al cual esta accediendo el usuario}
+
+RewriteCond %{SCRIPT_FILENAME} !-f 
+
+
+# Para varias variables (Ej: 3) es asi:   RewriteRule ^(.*)/(.*)-(.*)$ index.html?seccion=$1&categoria=$2&otra=$3 [L]
+
+RewriteRule ^(.*)$ index.html?op=$1 [L]
+
+#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
+# ofrece un documento de error global
+
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^.*$ /404.html [L]
+
+#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
+
+
+
+# Esto es para que el sitio web quede sin el www.
+
+
 <IfModule mod_rewrite.c>
-  RewriteEngine on
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)$ index.html?/$1 [L,QSA]
-</IfModule>  
+  
+  RewriteCond %{HTTPS} !=on
+  
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  
+  RewriteRule ^ http://%1%{REQUEST_URI} [R=301,L] 
+
+</IfModule>
+
+
+# En caso de que la url no exista envia al 404
+
+#ErrorDocument 404  http://www.tupagina.com/404.html
+
+
+
+#Seguridad en htaccess:   http://www.jpereira.net/web/un-poco-de-seguridad-con-htaccess
+
+
+
+
+
+

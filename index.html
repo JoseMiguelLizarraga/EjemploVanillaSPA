@@ -54,10 +54,30 @@
 
     <contenido-app></contenido-app>
 
+    <!-- <include></include> -->
+
     <script type="module">
 
     import {Inicio} from "./componentes/inicio.js";    
     import {ApuntesTema} from "./componentes/apuntesTema/apuntesTema.js";
+
+    //============================================================================================>>>>> probando
+    /*    
+    var i = document.getElementsByTagName("include")[0];
+    let rutaArchivo = "404.html";
+
+    fetch(rutaArchivo).then(archivo => 
+    {
+        archivo.text().then(contenido => 
+        {
+            console.log(contenido);
+            i.insertAdjacentHTML('afterend', contenido);
+            i.remove();
+        });
+    });
+    */
+    //============================================================================================>>>>> probando
+
 
     var componente = null;
 
@@ -70,7 +90,7 @@
     {
         componente = new elemento.componente();
         var html = componente.cargarVista();
-        document.getElementsByTagName("contenido-app")[0].innerHTML = html;
+        //document.getElementsByTagName("contenido-app")[0].innerHTML = html;
         //componente.probando();
     }
 
