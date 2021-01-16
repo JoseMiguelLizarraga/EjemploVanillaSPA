@@ -28,8 +28,7 @@ RewriteEngine On
 # En un servidor wer se pone solo asi:   RewriteBase /
 # En localhost se pone todo lo que viene despues de http://localhost/
 
-#RewriteBase /EjemploAplicacionSPA/
-RewriteBase /
+RewriteBase /EjemploAplicacionSPA/
 
 
 # RewriteCond %{Si existe la carpeta a la cual esta accediendo el usuario} 
