@@ -3,16 +3,15 @@
 RewriteEngine On
 
 
-
-
-
 # En un servidor wer se pone solo asi:   RewriteBase /
 # En localhost se pone todo lo que viene despues de http://localhost/
 
-RewriteBase /EjemploAplicacionSPA/
+RewriteBase /
 RewriteCond %{SCRIPT_FILENAME} !-d 
 RewriteCond %{SCRIPT_FILENAME} !-f 
 #RewriteRule ^(.*)$ index.html?op=$1 [L]
+
+RewriteRule ^(.*)$ EjemploAplicacionSPA/index.html/$1 [L]
 
 
 #=========================================================================================>>>>>
@@ -29,7 +28,7 @@ RewriteCond %{SCRIPT_FILENAME} !-f
  #=========================================================================================>>>>>
 
 
- RewriteRule ^/(.*) https://josemiguellizarraga.github.io/EjemploAplicacionSPA/index.html/$1 [L, QSA]
+ #RewriteRule ^/(.*) https://josemiguellizarraga.github.io/EjemploAplicacionSPA/index.html/$1 [L, QSA]
 
 
 
