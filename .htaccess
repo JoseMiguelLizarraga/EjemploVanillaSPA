@@ -1,41 +1,39 @@
 
-
+# Esto es importantisimo, sino varias cosas no funcionan
 RewriteEngine On
 
 
 # En un servidor wer se pone solo asi:   RewriteBase /
 # En localhost se pone todo lo que viene despues de http://localhost/
 
-RewriteBase /
+RewriteBase /EjemploAplicacionSPA/
+
+
+# RewriteCond %{Si existe la carpeta a la cual esta accediendo el usuario} 
+
 RewriteCond %{SCRIPT_FILENAME} !-d 
+
+#RewriteCond %{REQUEST_FILENAME} !-f 
+
+# RewriteCond %{Si existe el archivo al cual esta accediendo el usuario}
+
 RewriteCond %{SCRIPT_FILENAME} !-f 
-#RewriteRule ^(.*)$ index.html?op=$1 [L]
-
-#RewriteRule ^(.*)$ EjemploAplicacionSPA/index.html/$1 [L]
-
-RewriteRule ^(.*)$ https://josemiguellizarraga.github.io/EjemploAplicacionSPA/$1 [L]
 
 
-#=========================================================================================>>>>>
+# Para varias variables (Ej: 3) es asi:   RewriteRule ^(.*)/(.*)-(.*)$ index.html?seccion=$1&categoria=$2&otra=$3 [L]
 
- #RewriteCond %{HTTP_HOST} !^www.example.com$
- #RewriteCond %{HTTP_HOST} ^blog\.example.com$
- #RewriteRule ^/(.*) http://blog.example.com/index.php/$1 [L, QSA]
+RewriteRule ^(.*)$ index.html?op=$1 [L]
 
+#RewriteRule ^(.*)$ https://josemiguellizarraga.github.io/EjemploAplicacionSPA/$1 [L]
 
+#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
+# ofrece un documento de error global
 
- #RewriteRule ^/(.*) http://blog.example.com/index.php/$1 [L, QSA]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^.*$ /404.html [L]
 
-
- #=========================================================================================>>>>>
-
-
- #RewriteRule ^/(.*) https://josemiguellizarraga.github.io/EjemploAplicacionSPA/index.html/$1 [L, QSA]
-
-
-
-
-
+#===============================================>>>> ojo, la posicion de esto es muy importante, sino da error
 
 
 

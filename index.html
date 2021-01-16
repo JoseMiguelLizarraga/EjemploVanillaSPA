@@ -29,8 +29,8 @@
             
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">				
-                    <li><a href="#" link="home">Home</a></li>
-                    <li><a href="#" link="apuntesTema">apuntesTema</a></li> 
+                    <li><a href="#" link="#home">Home</a></li>
+                    <li><a href="#" link="#apuntesTema">apuntesTema</a></li> 
   
                     <!--
                     <li class="dropdown">
@@ -97,7 +97,8 @@
     //=============================================================================>>>>>
     // Al cargar el documento
 
-    var nombre = window.location.href.split("/").reverse()[0];   // "apuntesTema"
+    var nombre = window.location.href.split("/").reverse()[0];       // "apuntesTema"
+    if (nombre.includes("#")) { nombre = nombre.replace("#", ""); }  // Remueve el # en caso de que lo tenga
 
     if (rutasProyecto.some(c=> c.nombre == nombre)) 
     {
@@ -133,6 +134,8 @@
             //var urlBaseProyecto = window.location.origin + window.location.pathname;   // "http://localhost/miProyecto/"
             //history.pushState({}, null, `${urlBaseProyecto}?${nombre}`);               // Cambia la url que ve el usuario. Ej:   "http://localhost/AAA/probandoSPA/?apuntesTema"
             history.replaceState({}, "", nombre);
+
+            if (nombre.includes("#")) { nombre = nombre.replace("#", ""); }  // Remueve el # en caso de que lo tenga
 
             var rutaEncontrada = rutasProyecto.find(c=> c.nombre == nombre);
 
