@@ -11,7 +11,9 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f 
 #RewriteRule ^(.*)$ index.html?op=$1 [L]
 
-RewriteRule ^(.*)$ EjemploAplicacionSPA/index.html/$1 [L]
+#RewriteRule ^(.*)$ EjemploAplicacionSPA/index.html/$1 [L]
+
+RewriteRule ^(.*)$ https://josemiguellizarraga.github.io/EjemploAplicacionSPA/$1 [L]
 
 
 #=========================================================================================>>>>>
