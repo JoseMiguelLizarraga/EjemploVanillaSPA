@@ -3,12 +3,21 @@
     import {rutasProyecto} from './configuraciones/rutasProyecto.js';
 
     var componente = null;
+    var extiende_de_HTMLElement = false;
 
     const inicializarComponente = (elemento) => 
     {
         try {
-            componente = new elemento.componente();
-            //var html = componente.cargarVista();
+            if (elemento.extendsHTMLElement != null && elemento.extendsHTMLElement == true)  // Si es un componente nativo
+            {
+                //console.log(elemento);
+                window.customElements.define("contenido-app", elemento.componente);
+                extiende_de_HTMLElement = true;
+            }
+            else {
+                componente = new elemento.componente();
+                //var html = componente.cargarVista();
+            }
         } 
         catch (error) {
             console.log(error);
@@ -62,6 +71,10 @@
 
             if (rutaEncontrada != null) 
             {
+                if (extiende_de_HTMLElement) {
+                    return window.location.reload();   // Recarga la pagina, ya que si no lo hace genera problemas
+                }
+
                 inicializarComponente(rutaEncontrada);
             }
         });

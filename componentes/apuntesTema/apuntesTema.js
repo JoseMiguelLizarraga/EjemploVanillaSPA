@@ -10,16 +10,17 @@ export class ApuntesTema extends CargaVista
     constructor()
     {
         super();
-        //this.nombre = "Leonardo Lima";
-
-        //alert("ApuntesTema");
-        Object.getOwnPropertyNames(ApuntesTema.prototype).forEach(c=> { window[c] = this[c]; });  // Coloca los metodos y variables para que esten disponibles desde el html
+ 
+        for (var prop in this) { window[prop] = this[prop]; }                                          // Coloca los atributos de la clase para que esten disponibles desde el html
+        Object.getOwnPropertyNames(this.constructor.prototype).forEach(c=> { window[c] = this[c]; });  // Coloca los metodos de la clase para que esten disponibles desde el html
+        
         this.cargarVista();
     }
 
     destructor() {
         //alert("destructor ApuntesTema");
-        Object.getOwnPropertyNames(ApuntesTema.prototype).forEach(c=> { window[c] = null; });  // Remueve los metodos y variables para que no queden en memoria
+        for (var prop in this) { delete window[prop]; }                                             // Remueve los atributos de la clase para que no queden en la ventana
+        Object.getOwnPropertyNames(this.constructor.prototype).forEach(c=> { delete window[c]; });  // Remueve los metodos de la clase para que no queden en la ventana
     }
 
     probando() {
@@ -28,10 +29,7 @@ export class ApuntesTema extends CargaVista
     
     cargarVista()
     {
-        this.cargarHtml({ rutaArchivo: "componentes/apuntesTema/index.html" });       
-
-        //return new Vista().mostrar(); 
-        //return `<h1>ApuntesTema</h1>`;
+        this.cargarHtml({ rutaArchivo: "apuntesTema/index.html" });       
     }
 };
 
