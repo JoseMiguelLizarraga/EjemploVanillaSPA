@@ -14,19 +14,18 @@ export class SistemaPlanetario extends HTMLElement
         }
 
         this.state = { 
+            cargando: false,
             titulo: "Sistema planetario",
             listaPlanetas: []
         };
     }
 
-    static get observedAttributes() { return ["cargando", "state"]; }
-
-    get cargando() { return JSON.parse(this.getAttribute("cargando")); }
-    set cargando(valor) { this.setAttribute("cargando", JSON.stringify(valor)); }
+    static get observedAttributes() { return ["state"]; }   // Asi observa todos los cambios del estado y los refleja en el html
 
     get state() { return JSON.parse(this.getAttribute("state")); }
     set state(valor) { this.setAttribute("state", JSON.stringify(valor)); }
 
+    cargando(valor) { this.state = { ...this.state, cargando: valor } }
 
     async connectedCallback()  // Esto es llamado cuando el elemento está conectado a la página
     {
@@ -35,19 +34,15 @@ export class SistemaPlanetario extends HTMLElement
 
     async obtenerListaPlanetas() 
     {
-        this.cargando = true;
+        this.cargando(true)
         const response = await fetch("componentes/sistemaPlanetario/planetas.json");
-        const json = await response.json();
-
-        var estado = this.state;
-        estado.listaPlanetas = json;
-        this.state = estado;
-
-        this.cargando = false;
+        const arregloJson = await response.json();
+        this.state = { ...this.state, listaPlanetas: arregloJson } 
+        this.cargando(false)
     }
  
     attributeChangedCallback(attrName, oldVal, newVal) {
-        this.render();
+        this.mostrarPagina();
     }
 
     asignarEventos()
@@ -76,18 +71,15 @@ export class SistemaPlanetario extends HTMLElement
             });
         }  
 
-        ventana.querySelector("#txt_cambiar_titulo").addEventListener("keyup", (evento) => 
-        { 
-            var estado = this.state;
-            estado.titulo = evento.target.value;
-            this.state = estado;
+        ventana.querySelector("#txt_cambiar_titulo").addEventListener("keyup", (evento) => { 
+            this.state = { ...this.state, titulo: evento.target.value } 
         });
 
     }
 
-    render()
+    mostrarPagina()
     {
-        if (this.cargando) {
+        if (this.state.cargando) {
             //this.innerHTML = "Cargando ...";
             this.shadowRoot.innerHTML = `Cargando ...`;
         } 
